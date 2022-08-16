@@ -1,0 +1,24 @@
+CREATE TABLE store (id INTEGER PRIMARY KEY, product TEXT, price INTEGER, rating INTEGER, color INTEGER); /** creates table and rows **/
+
+INSERT INTO store VALUES (1, "boots", 100, 5, "red");
+INSERT INTO store VALUES (2, "cat", 100, 5, "yellow");
+INSERT INTO store VALUES (3, "dog", 500, 5, "orange");
+INSERT INTO store VALUES (4, "hat", 100, 5, "blue");
+INSERT INTO store VALUES (5, "mouse", 400, 5, "red");
+INSERT INTO store VALUES (6, "elephant", 100, 5, "red");
+INSERT INTO store VALUES (7, "pen", 100, 5, "red");
+INSERT INTO store VALUES (8, "pencil", 300, 5, "aqua");
+INSERT INTO store VALUES (9, "computer", 100, 5, "red");
+INSERT INTO store VALUES (10, "bottle", 250, 5, "green");
+INSERT INTO store VALUES (11, "microphone", 100, 5, "red");
+INSERT INTO store VALUES (12, "book", 150, 5, "red");
+INSERT INTO store VALUES (13, "marker", 100, 5, "blue");
+INSERT INTO store VALUES (14, "shoe", 100, 5, "white");
+INSERT INTO store VALUES (15, "sock", 100, 5, "grey");
+
+
+SELECT * FROM store; /** shows all items on screen **/
+
+SELECT SUM(price) FROM store; /** shows the total of price of all items in store **/
+
+SELECT * FROM store ORDER BY price; /** shows all items in store from lowest to highest cost by price column **/
