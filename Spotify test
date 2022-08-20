@@ -1,0 +1,17 @@
+SELECT * FROM BIT_DB.Spotifydata
+
+SELECT track_name, artist_name, popularity from BIT_DB.Spotifydata
+ORDER by popularity desc
+Limit 1
+
+SELECT track_name, artist_name, popularity from BIT_DB.Spotifydata
+Where artist_name = "Doja Cat"
+ORDER by popularity desc
+
+SELECT track_name, artist_name, popularity from BIT_DB.Spotifydata
+Where popularity > 89
+ORDER by popularity desc
+
+SELECT track_name, artist_name, popularity from BIT_DB.Spotifydata
+ORDER by popularity desc
+limit 10
