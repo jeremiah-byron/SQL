@@ -48,10 +48,62 @@ JOIN chinook.invoices inv
 ON inv.Customerid = cust.Customerid
 Order by inv.Total desc
 
-How many Invoices were there in 2009?
+- How many Invoices were there in 2009?
+
+SELECT COUNT(InvoiceID)
+    FROM chinook.invoices
+    HAVING InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31'
+    
 What are the total sales for 2009?
-Write a query that includes the purchased track name with each invoice line item.
-Write a query that includes the purchased track name AND artist name with each invoice line item.
-Provide a query that shows all the Tracks, and include the Album name, Media type, and Genre.
-Show the total sales made by each sales agent.
-Which sales agent made the most in sales in 2009?
+
+SELECT SUM(total)
+    FROM chinook.invoices
+    HAVING InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31'
+    
+- Write a query that includes the purchased track name with each invoice line item.
+
+SELECT track.name, inv.InvoiceLineId
+    FROM chinook.tracks track
+    JOIN chinook.invoice_items inv
+    ON track.TrackId = inv.TrackId
+    
+- Write a query that includes the purchased track name AND artist name with each invoice line item.
+
+SELECT track.Name, track.Composer, inv.InvoiceLineId 
+    FROM chinook.tracks track
+    JOIN chinook.invoice_items inv
+    ON track.TrackId = inv.TrackId
+    
+- Provide a query that shows all the Tracks, and include the Album name, Media type, and Genre.
+
+SELECT track.name, album.Title, media.name, genre.name
+    FROM chinook.tracks track
+    JOIN chinook.albums album
+    ON track.AlbumId = album.AlbumId
+    JOIN chinook.media_types media
+    ON track.MediaTypeId = media.MediaTypeId
+    JOIN chinook.genres genre
+    ON track.GenreId = genre.GenreId
+
+- Show the total sales made by each sales agent.
+
+SELECT emp.FirstName, emp.LastName, SUM(inv.Total) as total_sales
+    FROM chinook.employees emp
+    JOIN chinook.customers cust
+    ON emp.EmployeeId = cust.SupportRepId
+    JOIN chinook.invoices inv
+    ON cust.CustomerId = inv.CustomerId
+    WHERE emp.Title = 'Sales Support Agent' 
+    GROUP BY emp.FirstName;
+    
+- Which sales agent made the most in sales in 2009?
+
+SELECT emp.FirstName, emp.LastName, ROUND(SUM(inv.Total), 2) as total_sales
+    FROM chinook.employees emp
+    JOIN chinook.customers cust
+    ON emp.EmployeeId = cust.SupportRepId
+    JOIN chinook.invoices inv
+    ON cust.CustomerId = inv.CustomerId
+    WHERE emp.Title = 'Sales Support Agent' and inv.InvoiceDate like "%2009%"
+    GROUP BY emp.FirstName
+    ORDER BY (round(sum(Inv.Total), 2))  DESC LIMIT 1;
