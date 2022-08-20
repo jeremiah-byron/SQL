@@ -1,0 +1,38 @@
+CREATE TABLE movies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT);
+    
+INSERT into movies (name) VALUES ("RAGING BULL");
+INSERT into movies (name) VALUES ("THE GODFATHER");
+INSERT into movies (name) VALUES ("TAXIDRIVER");
+INSERT into movies (name) VALUES ("SCARFACE");
+
+    
+CREATE TABLE actors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    name TEXT);
+    
+INSERT into actors (name, person_id) VALUES ("ROBERT DENIRO", 1);
+INSERT into actors (name, person_id) VALUES ("ROBERTA DENIRO", 2);
+INSERT into actors (name, person_id) VALUES ("Joe Pesci", 3);
+INSERT into actors (name, person_id) VALUES ("Jolene Pesci", 4);
+
+CREATE TABLE married (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person1_id INTEGER,
+    person2_id INTEGER);
+
+INSERT into married (person1_id, person2_id) VALUES (1,2);
+INSERT into married (person1_id, person2_id) VALUES (3,4);
+
+SELECT movies.name, actors.name FROM movies
+    JOIN actors
+    ON movies.id = actors.person_id;
+
+SELECT a.name, b.name FROM married
+    JOIN actors a
+    ON married.person1_id = a.person_id
+    JOIN actors b
+    ON married.person2_id = b.person_id;
+    
